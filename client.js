@@ -4,7 +4,7 @@ angular.module('app', [])
   $scope.original = 0;
   $scope.waitingInterval = 2000;
   var originalObs = Rx.Observable.webSocket("ws://localhost:4000/events").retry(Infinity);
-  var auditObs = originalObs.auditTime($scope.waitingInterval)
+  var auditObs = originalObs.auditTime($scope.waitingInterval) //try throttleTime or debounceTime, with switch instead
   originalObs.subscribe(
     function (data) {
       $scope.$apply(()=>{

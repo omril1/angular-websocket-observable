@@ -18,13 +18,16 @@ wss.on('connection', function connection(ws) {
 
 
 function sendCounterAsync(ws, counter){
+  var interval = Math.sin(counter / Math.PI)*1000;
+  // var interval =  Math.random()*1000;
+  console.log(interval);
   setTimeout(() => {
     console.log('sending counterAsync ' + counter);
     if (ws.readyState == ws.OPEN) {
       ws.send(counter++);
       sendCounterAsync(ws, counter);
     }
-  }, Math.random()*1000);
+}, interval);
 }
 
 

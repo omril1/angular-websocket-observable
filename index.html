@@ -5,13 +5,18 @@
     <title>AngularJS Websocket Observable</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
     <script src="https://unpkg.com/@reactivex/rxjs@5.3.0/dist/global/Rx.js"></script>
+    <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
-    <div class="" ng-controller="mainCtrl">
-      <h1>{{original}}</h1>
-      <h1>{{audit}}</h1>
+    <div class="spaced" ng-controller="mainCtrl">
+      <h1>original: {{original}}</h1>
+      <h1>audit: {{audit}}</h1>
       <hr>
-      <h2>{{timeDiff}}</h2>
+      <h2>{{timeDiff}} miliseconds</h2>
+      <div class="progress">
+        <div class="bar" style="width: {{timeDiff*100 / waitingInterval}}%"></div>
+        <span class="text">{{timeDiff*100 / waitingInterval}}%</span>
+      </div>
     </div>
     <script src="./client.js"></script>
     <!-- <script src="./fromWebSocket.js"></script> -->

@@ -5,7 +5,6 @@ const WebSocket = require('ws');
 app.use(serveStatic('./'));
 
 
-var counter = 0;
 const wss = new WebSocket.Server({ port: 4000 });
 wss.on('connection', function connection(ws) {
 
@@ -13,16 +12,19 @@ wss.on('connection', function connection(ws) {
     console.log('received: %s', message);
   });
 
-  sendCounterAsync(ws);
+  var counter = 0;
+  sendCounterAsync(ws, counter);
 });
 
 
-function sendCounterAsync(ws){
+function sendCounterAsync(ws, counter){
   setTimeout(() => {
     console.log('sending counterAsync ' + counter);
-    ws.send(counter++);
-    sendCounterAsync(ws);
-  }, 2000);
+    if (ws.readyState == ws.OPEN) {
+      ws.send(counter++);
+      sendCounterAsync(ws, counter);
+    }
+  }, Math.random()*1000);
 }
 
 

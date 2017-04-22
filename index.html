@@ -4,12 +4,16 @@
     <meta charset="utf-8">
     <title>AngularJS Websocket Observable</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
-    <script src="https://unpkg.com/@reactivex/rxjs@5.3.0/dist/global/Rx.min.js"></script>
+    <script src="https://unpkg.com/@reactivex/rxjs@5.3.0/dist/global/Rx.js"></script>
   </head>
   <body>
     <div class="" ng-controller="mainCtrl">
-      {{text}}
+      <h1>{{original}}</h1>
+      <h1>{{audit}}</h1>
+      <hr>
+      <h2>{{timeDiff}}</h2>
     </div>
-    <script type="text/javascript" src="./client.js"></script>
+    <script src="./client.js"></script>
+    <!-- <script src="./fromWebSocket.js"></script> -->
   </body>
 </html>

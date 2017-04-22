@@ -3,9 +3,9 @@ angular.module('app', [])
   $scope.audit = 0;
   $scope.original = 0;
   $scope.waitingInterval = 2000;
-  var socketObserveable = Rx.Observable.webSocket("ws://localhost:4000/events").retry(Infinity);
-  var auditObs = socketObserveable.auditTime($scope.waitingInterval)
-  socketObserveable.subscribe(
+  var originalObs = Rx.Observable.webSocket("ws://localhost:4000/events").retry(Infinity);
+  var auditObs = originalObs.auditTime($scope.waitingInterval)
+  originalObs.subscribe(
     function (data) {
       $scope.$apply(()=>{
         $scope.original = data;

@@ -18,9 +18,9 @@ wss.on('connection', function connection(ws) {
 
 
 function sendCounterAsync(ws, counter){
-  var interval = Math.sin(counter / Math.PI)*1000;
-  // var interval =  Math.random()*1000;
-  console.log(interval);
+  var interval = Math.sin(counter * Math.PI * 5 / 180)*1000 + 1000;
+  // var interval =  Math.random()*1000 + 1000;
+  console.log('interval: ', interval);
   setTimeout(() => {
     console.log('sending counterAsync ' + counter);
     if (ws.readyState == ws.OPEN) {

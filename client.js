@@ -4,7 +4,7 @@ angular.module('app', [])
   $scope.original = 0;
   $scope.waitingInterval = 2000;
   var originalObs = Rx.Observable.webSocket("ws://localhost:4000/events").retry(Infinity);
-  var auditObs = originalObs.auditTime($scope.waitingInterval) //try throttleTime or debounceTime, with switch instead
+  var transformedObs = originalObs.throttleTime($scope.waitingInterval) //try switch or switchMap
   originalObs.subscribe(
     function (data) {
       $scope.$apply(()=>{
@@ -18,10 +18,10 @@ angular.module('app', [])
     function () {
         console.log('finished');
     });
-  auditObs.subscribe(
+  transformedObs.subscribe(
     function (data) {
       $scope.$apply(()=>{
-        $scope.audit = data;
+        $scope.transformed = data;
         $scope.timeDiff = Date.now() - $scope.time;
       });
     },
